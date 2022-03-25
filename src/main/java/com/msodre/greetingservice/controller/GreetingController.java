@@ -16,10 +16,10 @@ public class GreetingController {
   private static final String TEMPLATE = "%s, %s!";
   private final AtomicLong counter = new AtomicLong();
 
-  private GreetingConfig config;
+  private final GreetingConfig config;
 
   @RequestMapping("/greeting")
-  public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+  public Greeting greeting(@RequestParam(value = "name", defaultValue = "") String name) {
     if(name.isEmpty()) name = config.getDefaultValue();
     return new Greeting(counter.incrementAndGet(), String.format(TEMPLATE, config.getGreeting(), name));
   }
